@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8" />
+  <title>Bank API</title>
+  <!-- needed for adaptive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdn.redocly.com/redoc/v2.4.0/bundles/redoc.standalone.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+</head>
+
+<body>
+  <div id="redoc"></div>
+  <script>
+    // Function to load the OpenAPI specification
+    async function loadOpenApiSpec() {
+      try {
+        const response = await fetch('openapi.json');
+        if (!response.ok) {
+          throw new Error('Failed to load OpenAPI specification');
+        }
+        const openApiSpec = await response.json();
+
+        // Initialize Redoc with the loaded OpenAPI specification
+        Redoc.init(openApiSpec, {}, document.getElementById('redoc'));
+      } catch (error) {
+        console.error('Error loading OpenAPI specification:', error);
+      }
+    }
+
+    // Load the OpenAPI specification when the page loads
+    loadOpenApiSpec();
+  </script>
+</body>
+
+</html>
